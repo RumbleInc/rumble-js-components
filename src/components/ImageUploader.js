@@ -312,7 +312,7 @@ styler.registerComponentStyles('ImageUploader', {
     },
 
     '&-preview-transparent': {
-        backgroundImage: 'url(' + require('url!../../src/components/ImageUploader/bw-squares.png') + ')'
+        backgroundImage: 'url(' + require('url!../../images/ImageUploader/bw-squares.png') + ')'
     },
     '&-preview-grey': {
         background: '#f5f5f5'
