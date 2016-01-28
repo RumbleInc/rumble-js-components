@@ -1,0 +1,1 @@
+module.exports = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAApCAQAAAACach9AAAAQElEQVR4Ae3UsQ0AMQxCUUbwBtl/SjIAkmnupBSfX/uVVptzY23JLUhIyP9JyCnlzn4hfz5IyDdJPlEGCQkJmV0s7w11Q//JUwAAAABJRU5ErkJggg==';
