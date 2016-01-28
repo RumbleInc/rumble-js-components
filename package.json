@@ -28,6 +28,7 @@
     "lodash": "3.10.1",
     "merge": "^1.2.0",
     "moment": "2.10.6",
+    "moment-range": "2.0.3",
     "numeral": "1.5.3",
     "papaparse": "4.1.1",
     "react-color": "1.2.1",

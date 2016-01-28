@@ -1,5 +1,7 @@
 'use strict';
 
+require('./init.moment');
+
 module.exports = {
     'Button': require('./components/Button.js'),
     'ButtonLoading': require('./components/ButtonLoading.js'),
