@@ -42,12 +42,12 @@
     "file-loader": "0.8.4",
     "jscs": "2.9.0",
     "json-loader": "0.5.3",
-    "react": "^0.14.4",
-    "react-dom": "^0.14.4",
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7",
     "url-loader": "0.5.6"
   },
   "peerDependencies": {
-    "react": "^0.14.4",
-    "react-dom": "^0.14.4"
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
   }
 }
