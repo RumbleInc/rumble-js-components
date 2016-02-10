@@ -52,7 +52,7 @@ var InlineTooltip = React.createClass({
 
     handleMouseOver(event) {
         clearTimeout(this.timer);
-        this.refs['tooltip'].show({
+        this.tooltip.show({
             /* jshint ignore:start */
             content: <div style={this.props.style}>{this.props.children}</div>
             /* jshint ignore:end */
@@ -62,10 +62,10 @@ var InlineTooltip = React.createClass({
     handleMouseOut() {
         if (this.props.timeout) {
             this.timer = setTimeout(() => {
-                this.refs['tooltip'].hide();
+                this.tooltip.hide();
             }, this.props.timeout);
         } else {
-            this.refs['tooltip'].hide();
+            this.tooltip.hide();
         }
     },
 
@@ -82,7 +82,7 @@ var InlineTooltip = React.createClass({
                 onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}
             />
             <Tooltip
-                ref='tooltip'
+                ref={ref => this.tooltip = ref}
                 translatePosition={true}
                 position={this.props.position}
                 align={this.props.align}

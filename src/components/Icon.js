@@ -13,6 +13,7 @@ var Icon = React.createClass({
 
     propTypes: {
         icon: React.PropTypes.string,
+        src: React.PropTypes.string,
         style: React.PropTypes.object,
         onClick: React.PropTypes.func,
         onMouseOver: React.PropTypes.func,
@@ -33,8 +34,9 @@ var Icon = React.createClass({
 
         var styleIcon = {};
 
-        if (icons[this.props.icon]) {
-            styleIcon.backgroundImage = 'url("' + icons[this.props.icon] + '")';
+        var src = this.props.src || icons[this.props.icon];
+        if (src) {
+            styleIcon.backgroundImage = 'url("' + src + '")';
             if (!preload[this.props.icon]) {
                 var icon = new Image();
                 icon.onload = () => {
@@ -44,7 +46,7 @@ var Icon = React.createClass({
                     };
                     this.isMounted() && this.forceUpdate();
                 };
-                icon.src = icons[this.props.icon];
+                icon.src = src;
                 preload[this.props.icon] = {
                     width: icon.width,
                     height: icon.height

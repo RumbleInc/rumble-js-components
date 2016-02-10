@@ -62,13 +62,14 @@ var Button = React.createClass({
 
         /* jshint ignore:start */
         var Tag = this.props.tag;
-        return <Tag className={cn(classes)} style={style}
-                    onClick={!this.props.disabled && this.props.onClick}
-                    onKeyDown={this.handleKeyDown}
+        return <Tag
+            className={cn(classes)} style={style}
+            onClick={!this.props.disabled && this.props.onClick}
+            onKeyDown={this.handleKeyDown}
             tabIndex={!this.props.disabled ? 0 : undefined} title={this.props.title}>
-            {this.props.primaryIcon && <Icon className={cn('icon-primary')} icon={this.props.primaryIcon} />}
+            {this.props.primaryIcon && <Icon className={cn('icon-primary')} icon={this.props.primaryIcon}/>}
             {this.props.caption && <span className={cn('caption')}>{this.props.caption}</span>}
-            {this.props.secondaryIcon && <Icon className={cn('icon-secondary')} icon={this.props.secondaryIcon} />}
+            {this.props.secondaryIcon && <Icon className={cn('icon-secondary')} icon={this.props.secondaryIcon}/>}
         </Tag>;
         /* jshint ignore:end */
     }
