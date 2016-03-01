@@ -17,6 +17,7 @@ var Select = React.createClass({
             label: React.PropTypes.any,
             hint: React.PropTypes.string,
             value: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+            selectedLabel: React.PropTypes.any,
             disabled: React.PropTypes.bool,
             separator: React.PropTypes.bool,
             children: React.PropTypes.array
@@ -27,7 +28,8 @@ var Select = React.createClass({
         width: React.PropTypes.number,
         maxHeight: React.PropTypes.number,
         style: React.PropTypes.object,
-        inline: React.PropTypes.bool
+        inline: React.PropTypes.bool,
+        direction: React.PropTypes.oneOf(['up', 'down', 'smart'])
     },
 
     mixins: [
@@ -41,7 +43,8 @@ var Select = React.createClass({
 
     getDefaultProps: () => ({
         placeholder: 'Select',
-        maxHeight: 400
+        maxHeight: 400,
+        direction: 'smart'
     }),
 
     getInitialState: () => ({
@@ -272,7 +275,7 @@ var Select = React.createClass({
         /* jshint ignore:start */
         var caption = selectedOption ?
             <span>
-                {selectedOption.label}
+                {selectedOption.selectedLabel || selectedOption.label}
                 {selectedOption.hint && <span className={cn('option-hint')}>{selectedOption.hint}</span>}
             </span> :
             <span className={cn('placeholder')}>{this.props.placeholder}</span>;
@@ -312,7 +315,8 @@ var Select = React.createClass({
                 <div className={cn('caption')}>{caption}</div>
 
                 <DropDownContent
-                    className={cn('dropdown')} zIndex={100} visible={this.state.opened} tabIndex={null}
+                    className={cn('dropdown')} zIndex={100} visible={this.state.opened}
+                    tabIndex={null} direction={this.props.direction}
                     width={width} height={scrollingEnabled ? this.props.maxHeight + 10 : undefined}>
                     {options}
                 </DropDownContent>

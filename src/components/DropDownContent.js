@@ -24,7 +24,8 @@ var DropDownContent = React.createClass({
             React.PropTypes.number, React.PropTypes.bool  // pixels (arrow triangle side),
         ]),
         arrowPosition: React.PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-        arrowOffset: React.PropTypes.number // pixels, can be negative
+        arrowOffset: React.PropTypes.number, // pixels, can be negative,
+        direction: React.PropTypes.oneOf(['up', 'down', 'smart'])
     },
 
     mixins: [styler.mixinFor('DropDownContent')],
@@ -38,7 +39,8 @@ var DropDownContent = React.createClass({
         zIndex: 100,
         arrowAngle: 70,
         arrowPosition: 'right',
-        arrowOffset: 0
+        arrowOffset: 0,
+        direction: 'down'
     }),
 
     // handlers
@@ -76,6 +78,26 @@ var DropDownContent = React.createClass({
         }
     },
 
+    componentDidUpdate(prevProps) {
+        if (this.props.direction === 'smart') {
+            if (!prevProps.visible && this.props.visible) {
+                const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+                if (screenHeight > 0) {
+                    const node = ReactDOM.findDOMNode(this);
+                    const { bottom, top } = node.getBoundingClientRect();
+                    if (bottom > screenHeight) {
+                        node.style.bottom = '100%';
+                    } else {
+                        node.style.bottom = 'initial';
+                    }
+                }
+            } else if (prevProps.visible && !this.props.visible) {
+                const node = ReactDOM.findDOMNode(this);
+                node.style.bottom = 'initial';
+            }
+        }
+    },
+
     componentWillUnmount() {
         document.removeEventListener('click', this.handleClick, true);
         document.removeEventListener('keydown', this.handleKeyPress, true);
@@ -110,6 +132,9 @@ var DropDownContent = React.createClass({
             };
             styleArrow[this.props.arrowPosition] = -this.props.arrowSize / 2;
             styleArrow[offsetAttribute] = Math.abs(this.props.arrowOffset) - this.props.arrowSize / 2;
+        }
+        if (this.props.direction === 'up' || this.props.direction === 'top') {
+            style.bottom = '100%';
         }
 
         /* jshint ignore:start */

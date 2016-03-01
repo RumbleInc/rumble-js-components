@@ -21,6 +21,7 @@ var MultiSelect = React.createClass({
         options: React.PropTypes.arrayOf(React.PropTypes.shape({
             label: React.PropTypes.any.isRequired,
             value: React.PropTypes.oneOfType([React.PropTypes.number, React.PropTypes.string]),
+            selectedLabel: React.PropTypes.any,
             disabled: React.PropTypes.bool
         })),
         pinnedValues: React.PropTypes.array,
@@ -49,7 +50,8 @@ var MultiSelect = React.createClass({
         titleHeight: React.PropTypes.number,
         allHeight: React.PropTypes.number,
         filterHeight: React.PropTypes.number,
-        valuesLimit: React.PropTypes.number
+        valuesLimit: React.PropTypes.number,
+        direction: React.PropTypes.oneOf(['up', 'down', 'smart'])
     },
 
     mixins: [
@@ -69,7 +71,8 @@ var MultiSelect = React.createClass({
         allCaptionsLimit: 20,
         closeAfterSelect: true,
         allTitle: 'All',
-        moreCaption: ['+ one more option', '+ {n} more options']
+        moreCaption: ['+ one more option', '+ {n} more options'],
+        direction: 'smart'
     }),
 
     getInitialState: () => ({
@@ -451,7 +454,7 @@ var MultiSelect = React.createClass({
 
         var captions = _.reduce(this.props.options, (result, obj) => {
             if (!_.isUndefined(obj.value)) {
-                result[obj.value] = obj.label;
+                result[obj.value] = obj.selectedLabel || obj.label;
                 if (this.props.inverseSelectAll) {
                     allSelected = allSelected &&
                         (!_.isArray(this.state.value) || this.state.value.indexOf(obj.value) === -1);
@@ -611,6 +614,7 @@ var MultiSelect = React.createClass({
                     {this.state.expanded &&
                     <DropDownContent
                         className={cn('expander', 'caption')} zIndex={110} width={width} visible={true}
+                        direction={this.props.direction}
                         onHide={this.handleHideExpanded} onClick={this.handleClickExpander}>
                         {this.renderCaption(captions, this.props.allCaptionsLimit)}
                     </DropDownContent>}
@@ -627,10 +631,10 @@ var MultiSelect = React.createClass({
                         <span className={cn('placeholder')}>{this.props.placeholder}</span>)}
                 </div>
 
-                {!this.props.disabled && <DropDownContent className={cn('dropdown')} zIndex={100}
-                                                          visible={!this.state.expanded && this.state.opened}
-                                                          width={width} height={dropdownHeight}>
-
+                {!this.props.disabled && <DropDownContent
+                    className={cn('dropdown')} zIndex={100} direction={this.props.direction}
+                    visible={!this.state.expanded && this.state.opened}
+                    width={width} height={dropdownHeight}>
                     {this.props.title && <div className={cn('title')}>{this.props.title}</div>}
                     {this.props.allowSelectAll && <label className={cn('all')}>
                         <CheckBox ref='selectAll' value={allSelected} onChange={this.handleChangeSelectAll}/>
