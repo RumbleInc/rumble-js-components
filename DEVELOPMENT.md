@@ -4,7 +4,7 @@ Development
 
     git https://github.com/RumbleInc/rumble-js-components 
     cd rumble-js-components
-    npm install
+    npm install --only=dev
     npm link
     
     cd to/your/project/directory
