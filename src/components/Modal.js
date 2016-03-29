@@ -50,7 +50,7 @@ var Modal = React.createClass({
         position: 'middle center',
         align: 'middle center',
         target: document.documentElement,
-        closable: false,
+        closable: true,
         overlayVisible: true,
         overlayFull: true,
         fixed: true
