@@ -6,6 +6,8 @@
  * <Modal title="Title" ref="modal" closable={true} showButtons={true} width={400}>
  *     content of modal window
  * </Modal>
+ *
+ *
  */
 
 'use strict';
@@ -48,7 +50,7 @@ var Modal = React.createClass({
         position: 'middle center',
         align: 'middle center',
         target: document.documentElement,
-        closable: true,
+        closable: false,
         overlayVisible: true,
         overlayFull: true,
         fixed: true
@@ -250,7 +252,10 @@ var Modal = React.createClass({
         /* jshint ignore:start */
         return <DropDownContent className={cn('', this.props.fixed ? 'fixed' : 'absolute')} style={style}
                                 visible={this.state.visible} enabled={true} arrowSize={false}>
-            {this.props.title && <div className={cn('title')}>{this.props.title}</div>}
+            {this.props.title && <div className={cn('header-container')}>
+                <span className={cn('title')}>{this.props.title}</span>
+                {this.props.closable && <Button caption='Close' onClick={this.handleCloseClick} type='close' size='small'/>}
+            </div>}
             <div className={cn('content')}>
                 {this.state.content || this.props.children}
             </div>
@@ -303,9 +308,7 @@ styler.registerComponentStyles('Modal', {
     },
 
     '&-title': {
-        fontSize: 22,
-        padding: '15px 20px',
-        borderBottom: '1px solid #dbdbdb'
+        fontSize: 22
     },
 
     '&-content': {
@@ -327,6 +330,14 @@ styler.registerComponentStyles('Modal', {
         textAlign: 'center',
         marginBottom: '18px',
         color: '#aeaeae'
+    },
+    '&-header-container':{
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        borderBottom: '1px solid #dbdbdb',
+        padding: '8px 20px',
+        height: 50
     }
 
 });
