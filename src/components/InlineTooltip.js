@@ -8,7 +8,6 @@
  *
  * <InlineTooltip style={{padding:20}}>content of tooltip</InlineTooltip>*
  *
- * type can be ['icon','node']
  */
 
 'use strict';
@@ -32,8 +31,8 @@ var InlineTooltip = React.createClass({
         icon: React.PropTypes.string,
         iconStyle: React.PropTypes.object,
         timeout: React.PropTypes.number,
-        node : React.PropTypes.node,
-        type: React.PropTypes.string
+        node: React.PropTypes.node,
+        type: React.PropTypes.oneOf(['icon', 'node'])
     },
 
     mixins: [styler.mixinFor('InlineTooltip')],
@@ -43,7 +42,7 @@ var InlineTooltip = React.createClass({
      */
 
     getDefaultProps: () => ({
-        type : 'icon',
+        type: 'icon',
         icon: 'info',
         position: 'top center',
         align: 'bottom center',
@@ -82,11 +81,10 @@ var InlineTooltip = React.createClass({
         var cn = this.className;
         /* jshint ignore:start */
         return <div className={cn()}>
-            {this.props.type == 'icon' && <Icon
+            {this.props.type == 'icon' ? <Icon
                 icon={this.props.icon} style={this.props.iconStyle}
                 onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}
-            />}
-            {this.props.type == 'node' && <div onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>{this.props.node}</div>}
+            /> : <div onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>{this.props.node}</div>}
             <Tooltip
                 ref={ref => this.tooltip = ref}
                 translatePosition={true}
