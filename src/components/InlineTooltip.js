@@ -81,7 +81,7 @@ var InlineTooltip = React.createClass({
         var cn = this.className;
         /* jshint ignore:start */
         return <div className={cn()}>
-            {this.props.type == 'icon' ? <Icon
+            {this.props.type === 'icon' ? <Icon
                 icon={this.props.icon} style={this.props.iconStyle}
                 onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}
             /> : <div onMouseOver={this.handleMouseOver} onMouseOut={this.handleMouseOut}>{this.props.node}</div>}
