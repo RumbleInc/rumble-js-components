@@ -124,7 +124,9 @@ var FilterableContent = React.createClass({
         // search
         if (this.state.searchString) {
             var filterPredicate = this.props.filterPredicate || this.filterPredicate;
-            filteredData = _.filter(filteredData, filterPredicate.bind(this, this.state.searchString.toLowerCase()));
+            filteredData = _.filter(filteredData, (item, key) => {
+                return filterPredicate(this.state.searchString.toLowerCase(), item, key);
+            });
         }
         var countFound = filteredData.length;
 
