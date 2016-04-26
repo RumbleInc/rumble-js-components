@@ -85,10 +85,10 @@ var Modal = React.createClass({
                 if (_.isUndefined(this.targetFilter)) {
                     this.targetFilter = target.style.filter;
                 }
-                target.style.filter = this.props.overlayEffects;
                 if (_.isUndefined(this.targetWebkitFilter)) {
                     this.targetWebkitFilter = target.style.WebkitFilter;
                 }
+                target.style.filter = this.props.overlayEffects;
                 target.style.WebkitFilter = this.props.overlayEffects;
             } else {
                 this.overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.3)';
