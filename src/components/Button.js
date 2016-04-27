@@ -129,7 +129,7 @@ styler.registerComponentStyles('Button', {
     },
 
     '&-add:not(&-disabled)': {
-        border: '1px solid transparent',
+        border: '1px dashed #a3b8f7',
         backgroundColor: '#d1dcfc',
         color: '#4973ec',
         boxShadow: '0 1px 0 0 #e4e4e4'
@@ -261,7 +261,7 @@ styler.registerComponentStyles('Button', {
         paddingBottom: 13
     },
     '&-large &-icon-primary': {
-        marginRight: 20
+        marginRight: 12
     },
     '&-large &-icon-secondary': {
         marginLeft: 20

@@ -50,7 +50,7 @@ var Modal = React.createClass({
         position: 'middle center',
         align: 'middle center',
         target: document.documentElement,
-        closable: true,
+        closable: false,
         overlayVisible: true,
         overlayFull: true,
         fixed: true
@@ -254,7 +254,7 @@ var Modal = React.createClass({
                                 visible={this.state.visible} enabled={true} arrowSize={false}>
             {this.props.title && <div className={cn('header-container')}>
                 <span className={cn('title')}>{this.props.title}</span>
-                {this.props.closable && <Button caption='Close' onClick={this.handleCloseClick} type='close' size='small'/>}
+                {this.props.closable && <Button caption='Close' primaryIcon='trash' onClick={this.handleCloseClick} type='close' size='small'/>}
             </div>}
             <div className={cn('content')}>
                 {this.state.content || this.props.children}
