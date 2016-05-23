@@ -1,6 +1,6 @@
 {
   "name": "rumble-components",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "React components kit",
   "main": "lib/index.js",
   "scripts": {
