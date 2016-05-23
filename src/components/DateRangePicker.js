@@ -28,7 +28,8 @@ var DateRangePicker = React.createClass({
         style: React.PropTypes.object,
         minDate: React.PropTypes.any,
         maxDate: React.PropTypes.any,
-        monthsToShow: React.PropTypes.number
+        monthsToShow: React.PropTypes.number,
+        direction: React.PropTypes.oneOf(['up', 'down', 'smart'])
     },
 
     mixins: [
@@ -42,6 +43,7 @@ var DateRangePicker = React.createClass({
 
     getDefaultProps: () => ({
         align: 'left',
+        direction: 'smart',
         value: [],
         monthsToShow: 2,
         presets: [

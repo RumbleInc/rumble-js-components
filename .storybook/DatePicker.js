@@ -7,7 +7,6 @@ const DatePicker = require('../src/components/DatePicker');
 storiesOf('DatePicker', module)
     .add('default', () => (
         <DatePicker
-            opened={true}
             onChange={action('onChange')}
         />
     ))
@@ -15,14 +14,12 @@ storiesOf('DatePicker', module)
         <div style={{float: 'right'}}>
             <DatePicker
                 align='right'
-                opened={true}
                 onChange={action('onChange')}
             />
         </div>
     ))
     .add('use minimum and maximum allowed dates', () => (
         <DatePicker
-            opened={true}
             onChange={action('onChange')}
             maxDate={moment(new Date()).add(15, 'days')}
             minDate={moment(new Date()).subtract(15, 'days')}
@@ -30,9 +27,21 @@ storiesOf('DatePicker', module)
     ))
     .add('two months', () => (
         <DatePicker
-            opened={true}
             onChange={action('onChange')}
             monthsToShow={2}
+        />
+    ))
+    .add('at the end of the page', () => (
+        <div style={{height:'75vh',display:'flex',flex:1,alignItems:'flex-end'}}>
+            <DatePicker
+                onChange={action('onChange')}
+            />
+        </div>
+    ))
+    .add('opened', () => (
+        <DatePicker
+            opened={true}
+            onChange={action('onChange')}
         />
     ))
 ;

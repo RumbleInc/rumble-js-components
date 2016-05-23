@@ -95,8 +95,7 @@ var Select = React.createClass({
      */
 
     handleKeyDown(event) {
-        if (!event.ctrlKey && !event.metaKey && !event.altKey && !event.shiftKey &&
-            event.keyCode >= 33 && event.keyCode <= 40) {
+        if (!event.ctrlKey && !event.shiftKey && event.keyCode >= 33 && event.keyCode <= 40) {
 
             event.preventDefault();
             event.stopPropagation();
@@ -120,18 +119,18 @@ var Select = React.createClass({
             var scrolledOption;
             var delta = Math.floor(optionsPerPage);
 
-            if (event.keyCode === 36) { // home
+            if (event.keyCode === 36 || (event.metaKey && event.keyCode === 38)) { // home
                 newIndex = 0;
 
-            } else if (event.keyCode === 35) { // end
+            } else if (event.keyCode === 35 || (event.metaKey && event.keyCode === 40)) { // end
                 newIndex = keys.length - 1;
 
-            } else if (event.keyCode === 33) { // page up
+            } else if (event.keyCode === 33 || (event.altKey && event.keyCode === 38)) { // page up
                 if (currentIndex !== -1) {
                     newIndex = Math.max(0, currentIndex - delta);
                 }
 
-            } else if (event.keyCode === 34) { // page down
+            } else if (event.keyCode === 34 || (event.altKey && event.keyCode === 40)) { // page down
                 if (currentIndex !== -1) {
                     newIndex = Math.min(keys.length - 1, currentIndex + delta);
                 }
@@ -383,7 +382,8 @@ styler.registerComponentStyles('Select', {
 
     '& > &-dropdown': {
         left: 0,
-        top: height - 1,
+        marginTop: -1,
+        marginBottom: -1,
         backgroundColor: '#ffffff',
         padding: '4px 0 6px 0',
         boxSizing: 'border-box',

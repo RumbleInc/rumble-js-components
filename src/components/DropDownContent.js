@@ -43,6 +43,23 @@ var DropDownContent = React.createClass({
         direction: 'down'
     }),
 
+    // helpers
+
+    adjust() {
+        const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+        if (screenHeight > 0) {
+            const node = ReactDOM.findDOMNode(this);
+            const {bottom, top, height} = node.getBoundingClientRect();
+            const bottomOverflow = bottom - screenHeight; // >0 = overflow
+            const topOverflow = height - top; // >0 = overflow
+            if (bottomOverflow > 0 && topOverflow < bottomOverflow) {
+                node.style.bottom = '100%';
+            } else {
+                node.style.bottom = 'initial';
+            }
+        }
+    },
+
     // handlers
 
     handleClick(event) {
@@ -76,21 +93,15 @@ var DropDownContent = React.createClass({
             document.addEventListener('click', this.handleClick, true);
             document.addEventListener('keydown', this.handleKeyPress, true);
         }
+        if (this.props.direction === 'smart' && this.props.visible) {
+            this.adjust();
+        }
     },
 
     componentDidUpdate(prevProps) {
         if (this.props.direction === 'smart') {
             if (!prevProps.visible && this.props.visible) {
-                const screenHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-                if (screenHeight > 0) {
-                    const node = ReactDOM.findDOMNode(this);
-                    const { bottom, top } = node.getBoundingClientRect();
-                    if (bottom > screenHeight) {
-                        node.style.bottom = '100%';
-                    } else {
-                        node.style.bottom = 'initial';
-                    }
-                }
+                this.adjust();
             } else if (prevProps.visible && !this.props.visible) {
                 const node = ReactDOM.findDOMNode(this);
                 node.style.bottom = 'initial';

@@ -89,7 +89,8 @@ module.exports = function () {
         </div>
 
         <DropDownContent
-            style={styleDropDown} className={cn('dropdown')} zIndex={100} visible={this.state.opened}
+            style={styleDropDown} className={cn('dropdown')} zIndex={100}
+            visible={this.state.opened} direction={this.props.direction}
             tabIndex={0} width={this.state.customMode ? (width - 1) * (this.props.monthsToShow + 1) + 1 : width}>
             {calendars}
             <div key='mainPanel' className={cn('panel')}>

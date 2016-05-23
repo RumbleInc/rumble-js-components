@@ -28,7 +28,8 @@ const DatePicker = React.createClass({
         style: React.PropTypes.object,
         minDate: React.PropTypes.any,
         maxDate: React.PropTypes.any,
-        monthsToShow: React.PropTypes.number
+        monthsToShow: React.PropTypes.number,
+        direction: React.PropTypes.oneOf(['up', 'down', 'smart'])
     },
 
     mixins: [
@@ -40,7 +41,8 @@ const DatePicker = React.createClass({
 
     getDefaultProps: () => ({
         align: 'left',
-        monthsToShow: 1
+        monthsToShow: 1,
+        direction: 'smart'
     }),
 
     getInitialState: () => ({}),
@@ -152,8 +154,10 @@ const DatePicker = React.createClass({
             </div>
 
             <DropDownContent
-                style={styleDropDown} className={cn('dropdown')} zIndex={100} visible={opened}
-                tabIndex={0} width={(width - 1) * monthsToShow + 1}>
+                style={styleDropDown} className={cn('dropdown')}
+                zIndex={100} visible={opened} tabIndex={0}
+                direction={this.props.direction}
+                width={(width - 1) * monthsToShow + 1}>
 
                 {_.map(months, (month, index) => {
                     let prevMonth, nextMonth;
@@ -218,11 +222,10 @@ styler.registerComponentStyles('DatePicker', {
     cursor: 'default',
     position: 'relative',
     '&-caption': {
-        width: width,
+        width: 'inherit',
         height: height,
         textAlign: 'right',
-        zIndex: 101,
-        position: 'absolute',
+        zIndex: '101',
         padding: '0 30px 0 8px',
         boxSizing: 'border-box',
         fontSize: 15,
@@ -249,7 +252,8 @@ styler.registerComponentStyles('DatePicker', {
     },
 
     '& > &-dropdown': {
-        top: height - 1,
+        marginTop: -1,
+        marginBottom: -1,
         boxShadow: '0px 1px 4px 0px rgba(94, 94, 94, 0.5)',
         backgroundColor: '#ffffff',
         padding: 0,

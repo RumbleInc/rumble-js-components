@@ -49,7 +49,8 @@ styler.registerComponentStyles('DateRangePicker', {
     },
 
     '& > &-dropdown': {
-        top: height - 1,
+        marginTop: -1,
+        marginBottom: -1,
         boxShadow: '0px 1px 4px 0px rgba(94, 94, 94, 0.5)',
         backgroundColor: '#ffffff',
         padding: 0,
