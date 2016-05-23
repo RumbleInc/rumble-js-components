@@ -1,6 +1,7 @@
 'use strict';
 
-var _ = require('lodash'),
+var React = require('react'),
+    _ = require('lodash'),
     moment = require('moment'),
     DropDownContent = require('../DropDownContent'),
     CalendarMonth = require('../CalendarMonth'),
@@ -41,7 +42,7 @@ module.exports = function () {
     moment().range(
         this.state.anchorMonth.clone().subtract(this.props.monthsToShow - 1, 'months'),
         this.state.anchorMonth
-        )
+    )
         .by('months', (day) => {
             months.push(day);
         });
@@ -54,7 +55,8 @@ module.exports = function () {
             if (this.props.minDate && prevMonth.isBefore(this.props.minDate, 'month')) {
                 prevMonth = null;
             }
-        } else if (index === months.length - 1) {
+        }
+        if (index === months.length - 1) {
             nextMonth = month.clone().add(1, 'months');
             if (this.props.maxDate && nextMonth.isAfter(this.props.maxDate, 'month')) {
                 nextMonth = null;

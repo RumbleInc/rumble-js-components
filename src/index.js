@@ -12,6 +12,7 @@ module.exports = {
     'ColorPicker': require('./components/ColorPicker.js'),
     'ColorPickerNew': require('./components/ColorPickerNew.js'),
     'ContextMenu': require('./components/ContextMenu.js'),
+    'DatePicker': require('./components/DatePicker.js'),
     'DateRangePicker': require('./components/DateRangePicker.js'),
     'DropDownContent': require('./components/DropDownContent.js'),
     'EditableList': require('./components/EditableList.js'),
