@@ -66,3 +66,5 @@ test-dist
 .DS_Store
 
 src/*
+.storybook
+storybook
