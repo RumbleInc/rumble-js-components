@@ -46,10 +46,15 @@ var DateRangePicker = React.createClass({
         monthsToShow: 2,
         presets: [
             {
+                label: 'Yesterday',
+                fromDate: moment().subtract(1, 'days').startOf('day'),
+                toDate: moment().subtract(1, 'days').endOf('day')
+            },
+            {
                 label: 'Last 7 Days',
                 fromDate: moment().subtract(7, 'days'),
                 toDate: moment().subtract(1, 'days')
-            },
+            },            
             {
                 label: 'Last 30 Days',
                 fromDate: moment().subtract(30, 'days'),
